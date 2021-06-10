@@ -3,7 +3,7 @@ const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 // const bodyParser = require('body-parser');
-mongoose.connect('mongodb://localhost:27017/acme', {useNewUrlParser:true, useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost:27017/acme', {useNewUrlParser:true, useUnifiedTopology: true, useFindAndModify: false});
 
 const app = express();
 
@@ -101,5 +101,16 @@ app.put('/reviews/:id', (req, res) => {
     })
     .catch(err => {
         console.log(err.message)
+    })
+})
+
+//DELETE
+app.delete('/reviews/:id', (req, res) => {
+    console.log("DELETE review")
+    Review.findByIdAndRemove(req.params.id)
+    .then(
+        res.redirect('/')
+    ).catch((err) => {
+        console.log(err.message);
     })
 })

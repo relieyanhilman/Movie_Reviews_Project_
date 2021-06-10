@@ -1,10 +1,14 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
 // const bodyParser = require('body-parser');
 mongoose.connect('mongodb://localhost:27017/acme', {useNewUrlParser:true, useUnifiedTopology: true});
 
 const app = express();
+
+//override with POST having ?_methodDELETE or ?_method=PUT
+app.use(methodOverride('_method'));
 
 
 app.use(express.urlencoded({extended: true}));
@@ -50,7 +54,7 @@ app.get('/', (req, res) => {
 
 // Menuju ke FORM
 app.get('/reviews/new', (req, res) => {
-    res.render('reviews-new', {});
+    res.render('reviews-new', {title: "New Review"});
 })
 
 //CREATE
@@ -79,5 +83,23 @@ app.get('/reviews/:id', (req, res) => {
     })
     .catch((err) => {
         console.log(err.message);
+    })
+})
+
+// EDIT
+app.get('/reviews/:id/edit', (req, res) => {
+    Review.findById(req.params.id, function(err, review) {
+        res.render('reviews-edit', {review: review, title: "Edit Review"});
+    }).lean()
+})
+
+//UPDATE
+app.put('/reviews/:id', (req, res) => {
+    Review.findByIdAndUpdate(req.params.id, req.body)
+    .then(review => {
+        res.redirect(`/reviews/${review._id}`)
+    })
+    .catch(err => {
+        console.log(err.message)
     })
 })

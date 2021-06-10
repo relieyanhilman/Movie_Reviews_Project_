@@ -1,0 +1,30 @@
+<form method="POST" action="/reviews/{{review._id}}?_method=PUT">
+    {{> reviews-form}}
+
+        {{!-- <p>
+            <label for="rating">Rating</label>
+
+            <select name="Rating" id="rating">
+                <option value={{review.Rating}}>1</option>
+                <option value={{review.Rating}}>2</option>
+                <option value={{review.Rating}}>3</option>
+                <option value={{review.Rating}}>4</option>
+                <option value={{review.Rating}}>5</option>
+            </select>
+        </p> --}}
+        
+
+    
+
+    <!-- BUTTON -->
+    <p>
+        <button type="submit">Save Review</button>
+    </p>
+
+    <br>
+    
+    <a href="/">cancel</a>
+
+
+
+</form>

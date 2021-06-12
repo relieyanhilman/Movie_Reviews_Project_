@@ -1,3 +1,8 @@
+
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+
+ 
 <form method="POST" action="/reviews/{{review._id}}?_method=PUT">
     {{> reviews-form}}
 
@@ -17,9 +22,9 @@
     
 
     <!-- BUTTON -->
-    <p>
+    <div class="form-group">
         <button type="submit">Save Review</button>
-    </p>
+    </div>
 
     <br>
     
@@ -28,3 +33,5 @@
 
 
 </form>
+</div>
+</div>

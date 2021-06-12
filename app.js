@@ -114,3 +114,5 @@ app.delete('/reviews/:id', (req, res) => {
         console.log(err.message);
     })
 })
+
+module.exports = {app, Review};
